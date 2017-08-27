@@ -16,7 +16,6 @@ def validateContactForm( form ) :
 	subject = form['subject'];
 	message = form['message'];
 
-	print( firstName, lastName, email, subject, message );
 	return True;
 	return validateEmail( email );
 

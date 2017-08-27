@@ -10,7 +10,27 @@ app = Flask( __name__ );
 
 @app.route( "/", methods = [ "GET" ] )
 def index() :
-	return render_template( "index.html" );
+	connection = sql.connect( "database.db" );
+	connection.row_factory = sql.Row;
+
+	cursor = connection.cursor();
+
+	cursor.execute( "SELECT * FROM announcements" );
+	tmpAnnouncements = sorted( cursor.fetchall(), key = lambda tup: tup[2], reverse = True );
+
+	announcements = [];
+
+	for tmpAnnouncement in tmpAnnouncements :
+		if tmpAnnouncement[3] == 1 :
+			announcement = dict( tmpAnnouncement );
+			announcement['fecha'] = utilityFunctions.convertToTextDate( announcement['fecha'] );
+
+			announcements.append( announcement );
+
+		if len( announcements ) == 5 :
+			break;
+
+	return render_template( "index.html", announcements = announcements );
 
 @app.route( "/layout/", methods = [ "GET" ] )
 def layout() :
@@ -164,7 +184,7 @@ if __name__ == '__main__':
 	app.config["MAIL_USE_SSL"] = True
 	app.config['MAIL_USE_TLS'] = False
 	app.config["MAIL_USERNAME"] = 'tshurehog@gmail.com'
-	app.config["MAIL_PASSWORD"] = 'tshurehog1'
+	app.config["MAIL_PASSWORD"] = 'thisistotallymypassword'
 	mail.init_app(app)
 
 	app.run(debug = True, port = 5001 )

@@ -37,6 +37,17 @@ def insertDummyData( connection ) :
 
 	for j in range( 1, contestEntries ) :
 		edition = j;
+		title = "Announcement for Contest " + str( j );
+		fecha = "2017-08-" + str( 10 + j );
+		public = 1 if j < contestEntries - 1 else 0;
+		post = "TEXT FOR POST " + str( edition ) + "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+
+		queryAnnouncement = "INSERT INTO announcements (edition,title,fecha,public,post) VALUES (?,?,?,?,?)";
+		tupleAnnouncement = (edition,title,fecha,public,post);
+		cursor.execute( queryAnnouncement, tupleAnnouncement );
+		connection.commit();		
+
+		edition = j;
 		title = "Practice Contest " + str( j );
 		fecha = "2017-08-" + str( 10 + j );
 		public = 1 if j < contestEntries - 1 else 0;
@@ -74,6 +85,7 @@ def createDatabase() :
 
 	print( "Opened database!" );
 
+	connection.execute( "CREATE TABLE announcements (edition INTEGER, title TEXT, fecha TEXT, public INTEGER, post TEXT)" );
 	connection.execute( "CREATE TABLE contests (edition INTEGER, title TEXT, fecha TEXT, public INTEGER, link TEXT, synopsis TEXT, winner TEXT)" );
 	connection.execute( "CREATE TABLE problems (letter TEXT, edition INTEGER, title TEXT, judgeId TEXT, link TEXT, solution TEXT)" );
 
