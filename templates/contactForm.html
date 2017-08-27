@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block head %}
+	{{ super() }}
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/blog-post.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type=text/javascript src="{{ url_for('static',filename='js/utility.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="container" style="max-width:700px">
+		<div style="text-align:center">
+			<h5 class="mt-4">Have a question, comment or concern? Send us a message!</h5>
+		</div>
+
+	    <br style="clear:both">
+
+		<div class="container border rounded">
+			<form id="contactForm" action="{{ url_for('contact') }}" onsubmit="return validateContactForm()" method="POST" role="form">
+				<br style="clear:both">
+				<div class="form-group">
+					<input id="firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required>
+				</div>
+
+				<div class="form-group">
+					<input id="lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required>
+				</div>
+
+				<div class="form-group">
+					<input id="email" type="text" class="form-control" name="email" placeholder="Email" required>
+				</div>
+
+				<div class="form-group">
+					<input id="subject" type="text" class="form-control" name="subject" placeholder="Subject" required>
+				</div>
+
+				<div class="form-group">
+					<textarea id="message" type="textarea" class="form-control" name="message" placeholder="Message" rows="5" style="resize:none"></textarea>
+				</div>
+						
+				<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Submit</button>
+			</form>
+			<br style="clear:both">
+		</div>
+	</div>
+{% endblock %}

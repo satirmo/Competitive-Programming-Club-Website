@@ -1,0 +1,36 @@
+#contestLink {
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+}
+
+#contestSolutions {
+	padding-top: 0px;
+	margin-top: 0px;
+}
+
+#scoreboard {
+	display: block;
+    margin: 0 auto;
+}
+
+.tab-pane {
+	text-align: left;
+	padding: 10px;
+}
+
+.problemDescription > * {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.buttonPrevious{
+	float: left;
+}
+
+.buttonNext{
+	float: right;
+}
+
+#otherContestsButtons{
+	margin-bottom: 20px;
+}

@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ contest['title'] }}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/contest.css') }}">
+
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="max-width:1000px">
+        <!-- Title -->
+        <h1 class="mt-4">{{ contest['title'] }}</h1>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Posted on {{ contest['fecha'] }}</p>
+        <p id="contestLink">Problem Set: <a href="{{ contest['link'] }}">Link</a></p>
+        <p id="contestSolutions">Solutions: <a href="{{ contest['solutionsLink'] }}" download>Download</a></p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img id="scoreboard" class="img-fluid rounded" src="{{ contest['scoreboardLink'] }}" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p>{{ contest['synopsis'] }}</p>
+
+        <hr>
+
+        <div id="problems" class="card text-center my-4">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    {% for problem in problems %}
+                        <li class="nav-item">
+                            <a class="{{ problem['tabClass'] }}" data-toggle="tab" href="#{{ problem['letter'] }}" role="tab">{{ problem['letter'] }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="tab-content card-block">
+                {% for problem in problems %}
+                    <div id="{{ problem['letter'] }}" class="{{ problem['paneClass'] }}" role="tabpanel">
+                        <div class="problemDescription">
+                            <h5>Problem {{ problem['letter'] }}: {{ problem['title'] }}</h5>
+                            <h6>Source: <a href="{{ problem['link'] }}">{{ problem['judgeId'] }}</a></h6>
+                            <h6>Code:
+                                {% for solutionLink in problem['solutionLinks'] %}
+                                    &nbsp<a href="{{ solutionLink[0] }}" download>{{ solutionLink[1] }}</a>
+                                {% endfor %}
+                            </h6>
+                        </div>
+                        <br>
+                        {{ problem['solution'] }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="otherContestsButtons" class="clearfix">
+            {% if contest['hasPreviousContest'] %}
+                <a class="btn btn-secondary buttonPrevious" href="{{ contest['linkPreviousContest'] }}" role="button">&laquo; Previous Contest</a>
+            {% endif %}
+
+            {% if contest['hasNextContest'] %}
+                <a class="btn btn-secondary buttonNext" href="{{ contest['linkNextContest'] }}" role="button">Next Contest &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

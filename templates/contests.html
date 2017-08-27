@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}Past Contests{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+    <!-- Title -->
+    <div class="container" style="max-width:1000px">
+        <h1 class="mt-4">Past Contests</h1>
+
+        <hr>
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Contest Title</th>
+                    <th>Winner</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contest in contests %}
+                    <tr>
+                        <td><a href="{{ contest['pageURL'] }}">{{ contest['title'] }}</a></td>
+                        <td>{{ contest['winner'] }}</td>
+                        <td>{{ contest['fecha'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
