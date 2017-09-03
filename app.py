@@ -1,6 +1,7 @@
-from flask import Flask, session, redirect, url_for, escape, request, render_template
+from flask import abort, Flask, session, redirect, url_for, escape, request, render_template
 from flask_mail import Message, Mail;
 from flask_bootstrap import Bootstrap;
+from flask_recaptcha import ReCaptcha;
 import os;
 import sqlite3 as sql;
 import databaseManagement;
@@ -10,7 +11,8 @@ app = Flask( __name__ );
 
 @app.route( "/", methods = [ "GET" ] )
 def index() :
-	connection = sql.connect( "database.db" );
+	global databaseName;
+	connection = sql.connect( databaseName );
 	connection.row_factory = sql.Row;
 
 	cursor = connection.cursor();
@@ -27,8 +29,8 @@ def index() :
 
 			announcements.append( announcement );
 
-		if len( announcements ) == 5 :
-			break;
+		# if len( announcements ) == 5 :
+		# 	break;
 
 	return render_template( "index.html", announcements = announcements );
 
@@ -38,7 +40,8 @@ def layout() :
 
 @app.route( "/contests/", methods = [ "GET" ] )
 def contests() :
-	connection = sql.connect( "database.db" );
+	global databaseName;
+	connection = sql.connect( databaseName );
 	connection.row_factory = sql.Row;
 
 	cursor = connection.cursor();
@@ -64,7 +67,8 @@ def contests() :
 # CONSIDER REWRITING THIS WITH UTILITY FUNCTIONS
 @app.route( "/contest/<int:edition>/", methods = [ "GET" ] )
 def contest( edition ) :
-	connection = sql.connect( "database.db" );
+	global databaseName;
+	connection = sql.connect( databaseName );
 	connection.row_factory = sql.Row;
 
 	cursor = connection.cursor();
@@ -75,15 +79,12 @@ def contest( edition ) :
 	contests = cursor.fetchall();
 
 	if len( contests ) < 1 :
-		return "calm your horses! this contest hasn't even occurred yet!";
-
-	elif len( contests ) > 1 :
-		return "you messed up your indexing, buddy.";
+		abort( 404 );
 
 	contest = dict( contests[0] );
 
 	if contest['public'] == 0 :
-		return "this isn't public yet. quit snoopin'!"
+		abort( 404 );
 
 	# generate problem information
 
@@ -145,46 +146,61 @@ def contest( edition ) :
 
 	return render_template( 'contest.html', contest = contest, problems = problems );
 
+@app.route( "/resources/", methods = [ "GET" ] )
+def resources() :
+	return render_template( "resources.html" );
+
 # THIS NEEDS TO BE TIDIED UP
 @app.route( "/contact/", methods = [ "GET", "POST" ] )
 def contact() :
 	if request.method == "POST" :
-		# ADD SERVER SIDE VALIDATION
-		verdict = utilityFunctions.validateContactForm( request.form );
-		
-		if verdict != True :
-			return "failure"
-		
-		firstName = request.form['firstName'];
-		lastName = request.form['lastName'];
-		email = request.form['email'];
-		subject = request.form['subject'];
-		message = request.form['message']; 
+		status = utilityFunctions.validateContactForm( request.form, recaptcha.verify() );
 
-		msg = Message(subject, sender = "tshurehog@gmail.com", recipients=['tshurehog@gmail.com'])
-		msg.body = """
-		From: %s <%s>
-		%s
-		""" % ( firstName + " " + lastName, email, message)
-		mail.send(msg);
+		if status == "success" :
+			firstName = request.form['firstName'];
+			lastName = request.form['lastName'];
+			email = request.form['email'];
+			subject = request.form['subject'];
+			message = request.form['message']; 
 
-		return render_template( "contactForm.html", messageSent = "sucess" );
+			msg = Message(subject, sender = "tshurehog@gmail.com", recipients=['tshurehog@gmail.com'])
+			msg.body = """
+			From: %s <%s>
+			%s
+			""" % ( firstName + " " + lastName, email, message );
+			mail.send(msg);
+
+			return render_template( "contactFormSucess.html" );
+
+		else :
+			return render_template( "contactForm.html", errorMessage = status, data = request.form );
 
 	elif request.method == "GET" :
-		return render_template( "contactForm.html" );
+		data = { 'firstName' : "", 'lastName' : "", 'email' : "", 'subject' : "", 'message' : "" };
+		return render_template( "contactForm.html", errorMessage = "", data = data );
 
 if __name__ == '__main__':
-	databaseManagement.createDatabase();
+	databaseName = os.getcwd() + "/database.db";
+	databaseManagement.createDatabase(databaseName);
 
 	mail = Mail()
-
-	app.secret_key = 'super secret development key'
+	app.secret_key = 'this is my key'
 	app.config["MAIL_SERVER"] = "smtp.gmail.com"
 	app.config["MAIL_PORT"] = 465
 	app.config["MAIL_USE_SSL"] = True
 	app.config['MAIL_USE_TLS'] = False
-	app.config["MAIL_USERNAME"] = 'tshurehog@gmail.com'
-	app.config["MAIL_PASSWORD"] = 'thisistotallymypassword'
+	app.config["MAIL_USERNAME"] = 'thisismyemail@gmail.com'
+	app.config["MAIL_PASSWORD"] = 'thisismypassword'
 	mail.init_app(app)
 
-	app.run(debug = True, port = 5001 )
+	recaptcha = ReCaptcha()
+	app.config["RECAPTCHA_ENABLED"] = True;
+	app.config["RECAPTCHA_SITE_KEY"] = "thisismysitekey";
+	app.config["RECAPTCHA_SECRET_KEY"] = "thisismysecretkey";
+	app.config["RECAPTCHA_THEME"] = "light";
+	app.config["RECAPTCHA_TYPE"] = "image";
+	app.config["RECAPTCHA_SIZE"] = "normal";
+	app.config["RECAPTCHA_RTABINDEX"] = 0;
+	recaptcha.init_app(app);
+
+	app.run(debug = False, port = 5001)

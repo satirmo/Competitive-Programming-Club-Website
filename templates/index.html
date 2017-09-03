@@ -12,17 +12,9 @@
         <div class="col-lg-8">
             {% for announcement in announcements %}
                 <h3 class="mt-4">{{ announcement['title'] }}</h3>
-
-                <!-- Date/Time -->
                 <p>Posted on {{ announcement['fecha'] }}</p>
-                
-                <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-
-                <br style="clear:both">
-                <br>
-
-                <p>{{ announcement['post'] }}</p>
-
+                <hr>
+                {{ announcement['post'] | safe }}
                 <hr>
             {% endfor %}
         </div>
@@ -31,9 +23,11 @@
         <div class="col-md-4">
             <!-- Categories Widget -->
             <div class="card my-4">
-                <h5 class="card-header">Meeting Time</h5>
+                <h5 class="card-header">Meetings</h5>
                 <div class="card-body">
-                    Saturdays at 2PM in ASB429
+                    <ul class="list-unstyled mb-0">
+                        <li>Saturdays at 2PM in ASB429</li>
+                    </ul>
                 </div>
             </div>
             

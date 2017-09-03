@@ -7,6 +7,7 @@
 	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/blog-post.css') }}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type=text/javascript src="{{ url_for('static',filename='js/utility.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/contact.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -17,30 +18,44 @@
 
 	    <br style="clear:both">
 
+	    {% if errorMessage != "" %}
+		    <h6 class="container border rounded errorMessage">
+					{{ errorMessage }}
+			</h6>
+	    {% endif %}
+
 		<div class="container border rounded">
 			<form id="contactForm" action="{{ url_for('contact') }}" onsubmit="return validateContactForm()" method="POST" role="form">
 				<br style="clear:both">
 				<div class="form-group">
-					<input id="firstName" type="text" class="form-control" name="firstName" placeholder="First Name" required>
+					<input id="firstName" type="text" class="form-control" name="firstName" placeholder="First Name" value="{{ data['firstName'] }}" required>
 				</div>
 
 				<div class="form-group">
-					<input id="lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" required>
+					<input id="lastName" type="text" class="form-control" name="lastName" placeholder="Last Name" value="{{ data['lastName'] }}" required>
 				</div>
 
 				<div class="form-group">
-					<input id="email" type="text" class="form-control" name="email" placeholder="Email" required>
+					<input id="email" type="text" class="form-control" name="email" placeholder="Email" value="{{ data['email'] }}" required>
 				</div>
 
 				<div class="form-group">
-					<input id="subject" type="text" class="form-control" name="subject" placeholder="Subject" required>
+					<input id="subject" type="text" class="form-control" name="subject" placeholder="Subject" value="{{ data['subject'] }}" required>
 				</div>
 
 				<div class="form-group">
-					<textarea id="message" type="textarea" class="form-control" name="message" placeholder="Message" rows="5" style="resize:none"></textarea>
+					<textarea id="message" type="textarea" rows="5" style="resize:none" class="form-control" name="message" placeholder="Message" required>{{ data['message'] }}</textarea>
 				</div>
 						
-				<button type="submit" id="submit" name="submit" class="btn btn-primary pull-right">Submit</button>
+				<div class="form-group text-center">
+					<div class="recaptcha">
+						{{ recaptcha }}
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button type="submit" id="submit" name="submit" class="btn btn-primary">Submit</button>
+				</div>
 			</form>
 			<br style="clear:both">
 		</div>

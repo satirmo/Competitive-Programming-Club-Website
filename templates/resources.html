@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}Resources{% endblock %}
+
+{% block head %}
+	{{ super() }}
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/blog-post.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type=text/javascript src="{{ url_for('static',filename='js/utility.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+	<div>
+		<h3 class="mt-4">Getting Started</h3>
+		<p>Below is a list of relatively easy problems along with their C++ and Python solutions. Feel free to test and modify them as you see fit. If you have trouble submitting your solutions, check out this <a href="https://open.kattis.com/help">page</a> or reach out to us.</p>
+		<div class="container" style="max-width:900px">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>Problem Name</th>
+						<th>C++ Solution</th>
+						<th>Python Solution</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href="https://open.kattis.com/problems/hello">Hello World!</a></td>
+						<td><a href="{{ url_for('static',filename='samples/hello.cpp') }}" download>Download</a></td>
+						<td><a href="{{ url_for('static',filename='samples/hello.py') }}" download>Download</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://open.kattis.com/problems/oddities">Oddities</a></td>
+						<td><a href="{{ url_for('static',filename='samples/oddities.cpp') }}" download>Download</a></td>
+						<td><a href="{{ url_for('static',filename='samples/oddities.py') }}" download>Download</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://open.kattis.com/problems/r2">R2</a></td>
+						<td><a href="{{ url_for('static',filename='samples/r2.cpp') }}" download>Download</a></td>
+						<td><a href="{{ url_for('static',filename='samples/r2.py') }}" download>Download</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p>Once your solutions have been accepted, hop on over to our <a href="https://open.kattis.com/universities/ramapo.edu">leaderboard</a> to view your rank.</p>
+	</div>
+
+	<div>
+		<h3 class="mt-4">Online Judges</h3>
+		<p>Online judges, such as Kattis, are useful as they provide us with an insanely large amount of programming challenges. Some of these online judges host frequent contests, while some online judges even allow us to create custom contests. Below is a list of recommended online judges:</p>
+		<ul>
+			<li><a href="https://atcoder.jp/">AtCoder</a></li>
+			<li><a href="http://codeforces.com/">Codeforces</a></li>
+			<li><a href="https://www.hackerrank.com/">HackerRank</a></li>
+			<li><a href="http://www.spoj.com/">Sphere Online Judge</a></li>
+			<li><a href="https://uva.onlinejudge.org/">UVa Online Judge</a></li>
+		</ul>
+	</div>
+
+	<div>
+		<h3 class="mt-4">Algorithm Tutorials</h3>
+		<p>Some of the problems that you may come across will require knowledge of specific algorithms or heuristics. This is a list of resources that are worth checking out if your itching to learn a new algorithm or two. Let us know if you find any other resources that are worth adding!</p>
+		<ul>
+			<li><a href="http://codeforces.com/blog/entry/23054">An awesome list for competitive programming!</a></li>
+			<li><a href="https://www.codechef.com/wiki/tutorials">CodeChef's Tutorials</a></li>
+			<li><a href="https://cses.fi/book.html">Competitive Programmer's Handbook</a></li>
+			<li><a href="https://www.hackerearth.com/practice/algorithms/searching/linear-search/tutorial/">HackerEarth's Tutorials and Notes</a></li>
+			<li><a href="https://www.topcoder.com/community/data-science/data-science-tutorials/">Topcoder's Data Science Tutorials</a></li>
+		</ul>
+	</div>
+{% endblock %}

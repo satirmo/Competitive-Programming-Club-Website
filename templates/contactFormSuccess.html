@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block head %}
+	{{ super() }}
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/blog-post.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type=text/javascript src="{{ url_for('static',filename='js/utility.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/contact.css') }}">
+{% endblock %}
+
+{% block content %}
+	<div class="container" style="max-width:700px">
+	    <br style="clear:both">
+
+	    <div class="container border rounded successMessage">
+	    	Message sent!
+	    </div>
+
+		<br style="clear:both">
+		</div>
+	</div>
+{% endblock %}

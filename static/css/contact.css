@@ -1,0 +1,19 @@
+.recaptcha {
+	display: inline-block;
+}
+
+#submit {
+	cursor: pointer;
+}
+
+.errorMessage {
+	padding: 5px;
+	text-align: center;;
+	background-color: #ffbaba;
+}
+
+.successMessage {
+	padding: 5px;
+	text-align: center;
+	background-color: #c5ffa8;
+}

@@ -6,13 +6,12 @@
     {{ super() }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/contest.css') }}">
-
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <!-- Title -->
-        <h1 class="mt-4">{{ contest['title'] }}</h1>
+        <h3 class="mt-4">{{ contest['title'] }}</h3>
 
         <hr>
 
@@ -29,7 +28,7 @@
         <hr>
 
         <!-- Post Content -->
-        <p>{{ contest['synopsis'] }}</p>
+        {{ contest['synopsis'] }}
 
         <hr>
 

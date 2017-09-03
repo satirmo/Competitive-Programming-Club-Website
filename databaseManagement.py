@@ -5,7 +5,8 @@ def isSQLite3( fileName ):
 	if not isfile( fileName ):
 		return False;
 
-	if getsize( fileName ) < 100: # SQLite database file header is 100 bytes
+	# SQLite database file header is 100 bytes
+	if getsize( fileName ) < 100:
 		return False;
 
 	with open( fileName, "rb" ) as fd:
@@ -37,17 +38,6 @@ def insertDummyData( connection ) :
 
 	for j in range( 1, contestEntries ) :
 		edition = j;
-		title = "Announcement for Contest " + str( j );
-		fecha = "2017-08-" + str( 10 + j );
-		public = 1 if j < contestEntries - 1 else 0;
-		post = "TEXT FOR POST " + str( edition ) + "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
-
-		queryAnnouncement = "INSERT INTO announcements (edition,title,fecha,public,post) VALUES (?,?,?,?,?)";
-		tupleAnnouncement = (edition,title,fecha,public,post);
-		cursor.execute( queryAnnouncement, tupleAnnouncement );
-		connection.commit();		
-
-		edition = j;
 		title = "Practice Contest " + str( j );
 		fecha = "2017-08-" + str( 10 + j );
 		public = 1 if j < contestEntries - 1 else 0;
@@ -73,11 +63,37 @@ def insertDummyData( connection ) :
 			cursor.execute( queryProblem, tupleProblem );
 			connection.commit();
 
+	######################################
+	######################################
+	######################################
+
+	edition = 0;
+	title = "Are you looking for a challenge?";
+	fecha = "2017-09-02";
+	public = 1;
+	post = "<p>If so, you should join our club!</p>\
+			<p>Now, you may be thinking, 'Why is this guy telling me what I should?'. Hear me out. Our club focuses on the problem-solving aspect of computer programming, making our club attractive for both programmers and non-programmers alike.</p>\
+			<ul>\
+				<li>\
+					<strong>Non-programmers.</strong> Have you ever given anybody directions to the their classroom? Assuming you have, you actually gave that person an algorithm! How easy was that? I won't lie; there are far more difficult problems out there, but you have to start somewhere. In addition to solving some challenging problems, you will learn how to translate your ideas to code! Trust me; the coding part isn't as bad as it sounds if you're algorithm designing ability is on point.\
+				</li>\
+				<li>\
+					<strong>Programmers.</strong> I expect that you will agree with me when I say that algorithm design is an essential part of the programming process (unless if you want to stuck in infinite debugging loop, of course). Along with improving you're algorithm design skills, you will find that you're coding and debugging speed will increase drastically if you attend our meetings consistently. Moreover, you'll become much more familiar with the language that you choose to use (which will probably be C++ or Python).\
+				</li>\
+			</ul>\
+			<p>It also stands to mention that our club participates in external contests, such as the ACM ICPC and the CCSCNE, during each semester. This means that you will also have the opportunity to interact and compete with some of the brightest students in our region.</p>\
+			<p>I have promised a fair amount of benefits of joining our club. In order to obtain these benefits, we will be holding a weekly crash course on a particular algorithm or heuristic to get our members up-to-speed. In addition, we will be a hosting weekly contests so that our members can track their improvement.</p>\
+			<p>If I have managed to pique your interest (hurray!) or if you have any questions, do not hesitate to send us a message!</p>\
+			<p>Take care,<br>Tomas</p>";
+
+	queryAnnouncement = "INSERT INTO announcements (edition,title,fecha,public,post) VALUES (?,?,?,?,?)";
+	tupleAnnouncement = (edition,title,fecha,public,post);
+	cursor.execute( queryAnnouncement, tupleAnnouncement );
+	connection.commit();
+
 	print "INSERTED DUMMMY DATA!";
 
-def createDatabase() :
-	databaseName = "database.db"
-
+def createDatabase( databaseName ) :
 	if isSQLite3( databaseName ) :
 		return False;
 
