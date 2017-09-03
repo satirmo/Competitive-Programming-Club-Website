@@ -1,7 +1,0 @@
--	Add footer
--	Add infinite scroll to Home page
--	Add Resources page
--	Clean up code (Tomas will take care of this)
-
--	Update database with summer contest results (Tomas will take care of this)
--	Deploy the website!
