@@ -1,0 +1,4 @@
+<div>
+	<p>Let the string \( S \) be the bits of the file before deletion, and let the string \( T \) be the same bits of the file after deletion.</p>
+	<p>We iterate through both strings simulataneously while keeping track of how many times \( S[ i ] \neq T[ i ] \). If this condition is satisfied exactly \( n \) times, we output "Deletion succeeded". Otherwise, we output "Deletion failed".</p>
+</div>

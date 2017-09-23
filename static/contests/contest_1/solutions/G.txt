@@ -1,0 +1,5 @@
+<div>
+	<p>One approach to solve this problem is to view each number as a vertex in a graph \( G \). To join the sets containing \( a \) and \( b \), we could construct an edge between \( a \) and \( b \). To check if two numbers are in the same set, we could run a graph traversal algorithm to determine if there exists a path between \( a \) and \( b \). Unfortunately, both of these methods are extremely slow for the given constaints.</p>
+
+	<p>Fortunately, this problem has a well-known solution. You can read more about it <a href="https://www.cs.princeton.edu/~rs/AlgsDS07/01UnionFind.pdf">here</a>. In particular, check out the path-compression optimization.</p>
+</div>

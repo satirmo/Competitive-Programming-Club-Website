@@ -23,14 +23,11 @@ def index() :
 	announcements = [];
 
 	for tmpAnnouncement in tmpAnnouncements :
-		if tmpAnnouncement[3] == 1 :
+		if tmpAnnouncement[4] == 1 :
 			announcement = dict( tmpAnnouncement );
 			announcement['fecha'] = utilityFunctions.convertToTextDate( announcement['fecha'] );
 
 			announcements.append( announcement );
-
-		# if len( announcements ) == 5 :
-		# 	break;
 
 	return render_template( "index.html", announcements = announcements );
 
@@ -163,7 +160,7 @@ def contact() :
 			subject = request.form['subject'];
 			message = request.form['message']; 
 
-			msg = Message(subject, sender = "tshurehog@gmail.com", recipients=['tshurehog@gmail.com'])
+			msg = Message(subject, sender = "myemai@gmail.com", recipients=['myemail@gmail.com'])
 			msg.body = """
 			From: %s <%s>
 			%s
@@ -184,23 +181,23 @@ if __name__ == '__main__':
 	databaseManagement.createDatabase(databaseName);
 
 	mail = Mail()
-	app.secret_key = 'this is my key'
+	app.secret_key = 'mykey'
 	app.config["MAIL_SERVER"] = "smtp.gmail.com"
 	app.config["MAIL_PORT"] = 465
 	app.config["MAIL_USE_SSL"] = True
 	app.config['MAIL_USE_TLS'] = False
-	app.config["MAIL_USERNAME"] = 'thisismyemail@gmail.com'
-	app.config["MAIL_PASSWORD"] = 'thisismypassword'
+	app.config["MAIL_USERNAME"] = 'myemail@gmail.com'
+	app.config["MAIL_PASSWORD"] = 'mypassword'
 	mail.init_app(app)
 
 	recaptcha = ReCaptcha()
 	app.config["RECAPTCHA_ENABLED"] = True;
-	app.config["RECAPTCHA_SITE_KEY"] = "thisismysitekey";
-	app.config["RECAPTCHA_SECRET_KEY"] = "thisismysecretkey";
+	app.config["RECAPTCHA_SITE_KEY"] = "mysitekey";
+	app.config["RECAPTCHA_SECRET_KEY"] = "mysecretkey";
 	app.config["RECAPTCHA_THEME"] = "light";
 	app.config["RECAPTCHA_TYPE"] = "image";
 	app.config["RECAPTCHA_SIZE"] = "normal";
 	app.config["RECAPTCHA_RTABINDEX"] = 0;
 	recaptcha.init_app(app);
 
-	app.run(debug = False, port = 5001)
+	app.run(debug = True, port = 5000)

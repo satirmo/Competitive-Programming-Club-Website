@@ -1,0 +1,4 @@
+<div>
+	<p>Without loss of generality, we will assume that \( m = n \). We can check if cell \( (x, y) \) belongs to ring 1 in constant time. A cell can also be updated in constant time. Since there are \( m^2 \) cells in the tree grid, we can update all the members of ring 1 in \( O( m^2 ) \) time.</p>
+	<p>Now, note that we can use this same method to find the members of the remaining rings. Since the tree grid will never contain more than \( m \) rings, we can update the entire tree grid in \( O( m^3 ) \).</p>
+</div>

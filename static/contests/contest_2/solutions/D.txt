@@ -1,0 +1,3 @@
+<div>
+	<p>Simulate the brick-laying process until there are no bricks left or if a row must be left incomplete. If at least \( h \) rows have been completed, output "YES". Otherwise, output "NO".</p>
+</div>

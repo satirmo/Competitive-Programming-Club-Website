@@ -1,0 +1,9 @@
+<div>
+	<p>Let \( C[ a ][ b ] = \binom{ a }{ b } \) (also known as the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficient</a>). Assuming that \( 0 \leq a, b \leq 2n \), the table \( C \) can be generated in \( O( n^2 ) \) by using <a href="https://en.wikipedia.org/wiki/Pascal%27s_triangle">Pascal's Triangle</a>.</p>
+
+	<p>Let \( L_k \) be the number of left \( k \)-step strides taken, and let \( R_k \) be the number of right \( k \)-step strides taken. This means that \( n = L_1 + R_1 + 2L_2 + 2R_2 \).</p>
+
+	<p>By the problem statement, we also know that \( L_1 = R_1 \), \( L_2 = R_2 \), and \( S_1 \leq S_2 \). This implies that \[ n = L_1 + R_1 + 2L_2 + 2R_2 = L_1 + L_1 + 2L_2 + 2L_2 = 2L_1 + 4L_2, \] i.e. \( n = 2L_1 + 4L_2 \). This means that we can determine the value of \( L_2 \) for any given value of \( L_1 \).</p>
+
+	<p>We proceed by fixing \( L_1 \) such that the corresponding value of \( L_2 \) is an integer and \( L_1 \leq L_2 \). Let \( S \) be the number of strides a team member takes with their left foot, i.e. \( S = L_1 + L_2 \). By the <a href="https://en.wikipedia.org/wiki/Stars_and_bars_(combinatorics)">Stars and Bars</a> problem, we know that there are \( C[ S ][ L_1 ] \) different ways to take left-strides. Now, recall that \( R_1 = L_1 \) and \( R_2 = L_2 \). This means that there are also \( C[ S ][ L_1 ] \) different ways to take right-strides. Since a team member must alternate between left and right strides, it follows from the multiplication principle that there are \( C[ S ][ L_1 ] ^2 \) different ways to take \( L_1 \) one-step while taking \( L_2 \) two-step left strides. By considering all non-negative \( L_1 \leq n \), our solution will have an overall time complexity of \( O( n^2 ) \).</p>
+</div>

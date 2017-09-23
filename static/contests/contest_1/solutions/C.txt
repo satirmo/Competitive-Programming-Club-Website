@@ -1,0 +1,7 @@
+<div>
+	<p>Let \( m \) be the size of Godzilla's army, and let \( n \) be the size of MechaGodzilla's army.</P>
+
+	<p>It's important to note that the armies might not be ordered. This means that searching for the weakest monster in an army would take linear time with respect to that army's size. Since there could be up to \( m + n \) battles, searching naively for the weakest remaining monsters for each battle could require \( O( ( m + n )^2 ) \) time. This is not feasible given that \( n \hbox{ and } m \) can be up to 100000.</p>
+
+	<p>Fortunately, we can sort Godzilla's army in \( O( m \hbox{ log } m ) \) and MechaGodzilla's army in \( O( n \hbox{ log } n ) \). At most \( m + n \) battles could still occur. However, the defeated monster can now be replaced in constant time. This gives our solution an overall time complexity of \( O( m \hbox{ log } m + n \hbox{ log } n ) \).</p>
+</div>

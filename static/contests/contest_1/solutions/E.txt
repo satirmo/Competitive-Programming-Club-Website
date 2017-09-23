@@ -1,0 +1,14 @@
+<div>
+	<p>This problem can be solved easily if you know the how to generate primes and how to traverse a graph. If you do not know how to do either of these, check out the following resources:
+		<ul>
+			<li>Generating Primes: <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve of Eratosthenes</a></li>
+			<li>Graph Traversal: <a href="https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/tutorial/">Breadth First Search</a> or <a href="https://www.hackerearth.com/practice/algorithms/graphs/depth-first-search/tutorial/">Depth First Search</a></li>
+		</ul>
+	</p>
+
+	<p>Let \( isPrime \) be an array of size \( 10000 \). Set \( isPrime[ i ] = 1 \) if \( i \) is prime. Otherwise, set \( isPrime[ i ] = 0 \). This array can be filled in by using the Sieve of Eratosthenes.</p>
+
+	<p>From here, constuct a graph \( G \). The vertices of \( G \) will be all four-digit primes. Moreover, an edge will exist between two four-digit primes if and only if they differ in exactly one digit. To construct this graph efficiently, consider each four-digit prime \( p \) individually. Next, consider each four-digit number \( q \) that differs from \( p \) in exactly one digit. If \( isPrime[ q ] = 1 \), an edge should be constructed between \( p \) and \( q \).</p>
+
+	<p>We can now solve the original problem. Since the two given numbers will always be vertices in our graph, it is sufficient to find the shortest path between them (if it exists). This can be done in multiple ways, but it is sufficient to launch a Breadth-First Search or Depth-First Search starting from either number.</p>
+</div>

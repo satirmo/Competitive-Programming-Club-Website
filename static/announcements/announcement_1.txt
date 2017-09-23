@@ -1,0 +1,25 @@
+Are you looking for a challenge?
+2017-09-02
+Tomas Carino-Bazan
+1
+<div>
+	<p>If so, you should join our club!</p>
+	
+	<p>Now, you may be thinking, 'Why is this guy telling me what I should?'. Hear me out. Our club focuses on the problem-solving aspect of computer programming, making our club attractive for both programmers and non-programmers alike.</p>
+		<ul>
+			<li>
+					<strong>Non-programmers.</strong> Have you ever given anybody directions to the their classroom? Assuming you have, you actually gave that person an algorithm! How easy was that? I won't lie; there are far more difficult problems out there, but you have to start somewhere. In addition to solving some challenging problems, you will learn how to translate your ideas to code! Trust me; the coding part isn't as bad as it sounds if you're algorithm designing ability is on point.
+			</li>
+			
+			<li>
+					<strong>Programmers.</strong> I expect that you will agree with me when I say that algorithm design is an essential part of the programming process (unless if you want to stuck in infinite debugging loop, of course). Along with improving you're algorithm design skills, you will find that you're coding and debugging speed will increase drastically if you attend our meetings consistently. Moreover, you'll become much more familiar with the language that you choose to use (which will probably be C++ or Python).
+			</li>
+		</ul>
+	<p>It also stands to mention that our club participates in external contests, such as the ACM ICPC and the CCSCNE, during each semester. This means that you will also have the opportunity to interact and compete with some of the brightest students in our region.</p>
+	
+	<p>I have promised a fair amount of benefits of joining our club. In order to obtain these benefits, we will be holding a weekly crash course on a particular algorithm or heuristic to get our members up-to-speed. In addition, we will be a hosting weekly contests so that our members can track their improvement.</p>
+
+	<p>If I have managed to pique your interest (hurray!) or if you have any questions, do not hesitate to send us a message!</p>
+	
+	<p>Take care,<br>Tomas</p>
+</div>

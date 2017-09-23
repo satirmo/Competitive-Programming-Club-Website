@@ -1,0 +1,3 @@
+<div>
+	<p>The longest segments in the box are the box's diagonals. Thus, it is sufficient to check if one of the box's diagonals are longer than a given match. The length of a diagonal can be calculated via the equation, \( \sqrt{ w^2 + h^2  } \), where \( h \) and \( w \) are the height and width of the box, respectively.</p>
+</div>

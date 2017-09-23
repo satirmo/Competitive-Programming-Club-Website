@@ -1,0 +1,8 @@
+<div>
+	<p>Let \( G = ( V, E ) \) be the given graph.
+
+	<p>Let \( T \) be a two-dimensional matrix of size \( tn \). The entry \( T[ x ][ u ] \) will be the number of squawks recieved by user \( u \) during the round \( x \). Trivially, \( T[ 0 ][ s ] = 1 \) while \( T[ 0 ][ r ] = 0 \) if \( r \neq s \).</p>
+
+	<p>Suppose that \( x \) minutes have passed. User \( u \) will give each of its neighbors \( T[ x ][ u ] \) squawks during round \( x+1 \). This means that \( T[ x+1 ][ v ] = \sum\limits_{ (u,v) \in E } T[ x ][ u ] \). Calculating all \( T[ x ][ u ] \) via this method requires \( O( t (n + m ) ) \) time.</p>
+	<p>Since \( t \leq 10 \), \( n \leq 100 \) and \( m \leq 5000 \), this method is sufficient for solving this problem. In particular, the answer can calculated by adding \( T[ t ][ u ] \), with \( 0 < u < n \). It should be noted that this solution uses \( O( n^2 + tn ) \) memory. Is it possible to reduce our memory usage to \( O( n^2 ) \)?</p>
+</div>

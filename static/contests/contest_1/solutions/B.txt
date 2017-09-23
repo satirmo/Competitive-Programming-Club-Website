@@ -1,0 +1,3 @@
+<div>
+	<p>The pizza and the cheese portion of the pizza are both round. Moreover, their radii are \( R \) and \( R - C \), respectively. This means that their areas are \( A_{pizza} = \pi R^2 \) and \( A_{cheese} = \pi ( R - C ) ^ 2 \). Our final answer for this problem is \( 100 \cdot \frac{ A_{cheese} }{ A_{pizza} }. \)</p>
+</div>

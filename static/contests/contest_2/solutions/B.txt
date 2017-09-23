@@ -1,0 +1,5 @@
+<div>
+	<p>Let \( a \) be the given time in minutes, and let \( b \) be the anwer in minutes.</p>
+	<p>The value of \( a \) can be calculated via the equation: \( a = 60h + m \). The time \( b \) can then be found by subtracting 45 minutes from \( a \). Alternatively, we can add 14355 to \( a \) and "mod" the result by 14400, i.e. \( b = ( a + 14355 ) \bmod 14400 \).</p>
+	<p>Finally, the hour portion of our answer will be \( H = \left\lfloor \frac{ b }{ 60 } \right\rfloor \) while the minute portion will be \( M = b \bmod 60 \)</p>
+</div>

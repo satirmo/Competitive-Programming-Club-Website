@@ -1,0 +1,144 @@
+<div>
+	<p>We need to calculate the \( n \)-th Fibonacci number, \( F_n \). Unfortunately, an \( O( n ) \) solution will not work since \( n \leq 2^{48} \). We will consider a different approach.</p>
+
+	<p>Note that \( F_1 = 1 \), \( F_2 = 1 \), and \( F_n = F_{n-1} + F_{n-2} \). This means that we can write the following:
+	\[
+		\begin{bmatrix}
+			F_3 \\
+			F_2
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 \cdot F_2 + 1 \cdot F_1 \\
+			1 \cdot F_2 + 0 \cdot F_1
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{bmatrix}
+
+		\begin{bmatrix}
+			F_2 \\
+			F_1
+		\end{bmatrix}
+	\]</p>
+
+	<p> Similarly:
+	\[
+		\begin{bmatrix}
+			F_4 \\
+			F_3
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 \cdot F_3 + 1 \cdot F_2 \\
+			1 \cdot F_3 + 0 \cdot F_2
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{bmatrix}
+
+		\begin{bmatrix}
+			F_3 \\
+			F_2
+		\end{bmatrix}
+	\]</p>
+
+	<p>By combining our previous two equations, we obtain the following:
+	\[
+		\begin{bmatrix}
+			F_4 \\
+			F_3
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{bmatrix}
+
+		\begin{bmatrix}
+			F_3 \\
+			F_2
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{bmatrix}
+
+		\begin{bmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{bmatrix}
+
+		\begin{bmatrix}
+			F_2 \\
+			F_1
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{bmatrix}^2
+
+		\begin{bmatrix}
+			F_2 \\
+			F_1
+		\end{bmatrix}
+	\]</p>
+
+	<p>In general:
+	\[
+		\begin{bmatrix}
+			F_n \\
+			F_{n-1}
+		\end{bmatrix}
+
+		=
+
+		\begin{bmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{bmatrix}^{n-2}
+
+		\begin{bmatrix}
+			F_2 \\
+			F_1
+		\end{bmatrix}
+	\]</p>
+
+	<p>At this point, it seems like we've only managed to make our original problem more difficult. Fortunately, that is not the case!</p>
+
+	<p>Let \( A \) be a matrix. The following property holds for matrix exponentiation:
+	\[
+		A^n
+
+		=
+
+		\left\{
+        	\begin{array}{ll}
+				( A ^ { n/2 } ) ^ 2 & \quad n \text{ is even} \\
+				A ( A ^ { \lfloor n/2 \rfloor } ) ^ 2 & \quad n \text{ is odd} \\
+			\end{array}
+		\right.
+	\]</p>
+
+	<p>Calculating \( A^n \) using this method is \( O( \log n ) \), which is perfect for our needs. Since \( A \) is a \( 2 \times 2 \) matrix in our case, each matrix multiplication can be done in constant time. This implies that our original problem can be solved in \( O( \log n ) \).</p>
+</div>

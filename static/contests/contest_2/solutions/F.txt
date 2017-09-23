@@ -1,0 +1,3 @@
+<div>
+	<p>A solution for this problem can be found in the <strong>The Basics</strong> section of <a href="https://www.topcoder.com/community/data-science/data-science-tutorials/algorithm-games/">this article</a>.</p>
+</div>
